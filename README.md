@@ -1,21 +1,22 @@
 # Smart Factory Anomaly Explainer
 
-Minimal config to run the project.
+Minimal setup and config to run the project.
 
 ---
 
-## 1. Environment Variables
+## 1. Dataset: How to Download & Place It
 
-### Core
+This project uses the **“Condition monitoring of hydraulic systems”** dataset.
 
-- `HYDRAULIC_DATA_DIR`  
-  Path to the folder containing the hydraulic dataset `.txt` files, e.g.:
+1. Download the dataset archive from its original public source (search for  
+   `"Condition monitoring of hydraulic systems dataset"`).
+2. Extract all `.txt` files into:
 
-  ```bash
-  HYDRAULIC_DATA_DIR=/path/to/data/condition+monitoring+of+hydraulic+systems
+   ```text
+   data/condition+monitoring+of+hydraulic+systems/
 
 
-This folder should contain:
+So the folder contains:
 
 * `PS1.txt`, `PS2.txt`, `PS3.txt`, `PS4.txt`, `PS5.txt`, `PS6.txt`
 * `EPS1.txt`, `FS1.txt`, `FS2.txt`
@@ -23,11 +24,32 @@ This folder should contain:
 * `VS1.txt`, `CE.txt`, `CP.txt`, `SE.txt`
 * `profile.txt`
 
-If not set, the code defaults to:
+3. Make sure this folder is **not tracked by git** (add to `.gitignore`):
 
-```text
-<project_root>/data/condition+monitoring+of+hydraulic+systems
-```
+   ```gitignore
+   data/condition+monitoring+of+hydraulic+systems/
+   ```
+
+If `HYDRAULIC_DATA_DIR` is not set (see below), the code assumes this default path.
+
+---
+
+## 2. Environment Variables
+
+### Core
+
+* `HYDRAULIC_DATA_DIR`
+  Path to the folder containing the hydraulic dataset `.txt` files.
+
+  ```bash
+  HYDRAULIC_DATA_DIR=/path/to/data/condition+monitoring+of+hydraulic+systems
+  ```
+
+  If not set, defaults to:
+
+  ```text
+  <project_root>/data/condition+monitoring+of+hydraulic+systems
+  ```
 
 * `OLLAMA_HOST`
   URL of the Ollama server.
@@ -41,13 +63,12 @@ If not set, the code defaults to:
   Name of the Ollama model to use, e.g.:
 
   ```bash
-  # example
   OLLAMA_MODEL=llama3
   ```
 
 ---
 
-## 2. Local Run
+## 3. Local Run
 
 ```bash
 # example (PowerShell)
@@ -60,7 +81,7 @@ python smart_factory_anomaly_explainer.py
 
 ---
 
-## 3. Docker
+## 4. Docker
 
 ### Build
 
